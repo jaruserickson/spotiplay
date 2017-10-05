@@ -62,20 +62,20 @@ def update_queue(addr, queue):
     if addr:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.connect((HOST, PORT))
-        sock.send(('/UPDATE_Q').encode('ascii'))
-        sock.send(str(addr).encode('ascii'))
+        sock.send(('/UPDATE_Q').encode('utf-8'))
+        sock.send(str(addr).encode('utf-8'))
         sock.send(pickle.dumps(queue))
 
-        return sock.recv(1024).decode('ascii')
+        return sock.recv(1024).decode('utf-8')
 
 def playpause(addr, pytify):
     pytify.play_pause()    
     if addr:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.connect((HOST, PORT))
-        sock.send(('/PLAY_PAUSE').encode('ascii'))
-        sock.send(str(addr).encode('ascii'))
-        ret_val = sock.recv(4096).decode('ascii')
+        sock.send(('/PLAY_PAUSE').encode('utf-8'))
+        sock.send(str(addr).encode('utf-8'))
+        ret_val = sock.recv(4096).decode('utf-8')
         if ret_val[0] != '@':
             room_data = json.loads(ret_val)
         else:

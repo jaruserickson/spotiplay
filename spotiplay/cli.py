@@ -110,8 +110,8 @@ def create_room(host, port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((host, port))
 
-    sock.send(('/CREATE_ROOM').encode('ascii'))
-    room_key = sock.recv(1024).decode('ascii')
+    sock.send(('/CREATE_ROOM').encode('utf-8'))
+    room_key = sock.recv(1024).decode('utf-8')
     sock.close()
 
     return room_key
@@ -121,10 +121,10 @@ def leave_room(host, port, addr):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((host, port))
 
-    sock.send(('/LEAVE_ROOM').encode('ascii'))
-    sock.send(addr.encode('ascii'))
+    sock.send(('/LEAVE_ROOM').encode('utf-8'))
+    sock.send(addr.encode('utf-8'))
 
-    ret_val = sock.recv(1024).decode('ascii')
+    ret_val = sock.recv(1024).decode('utf-8')
     sock.close()
 
     return ret_val
@@ -134,9 +134,9 @@ def join_room(host, port, room_addr):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((host, port))
 
-    sock.send(('/JOIN_ROOM').encode('ascii'))
+    sock.send(('/JOIN_ROOM').encode('utf-8'))
     sock.send((str(room_addr)))
-    ret_val = sock.recv(1024).decode('ascii')
+    ret_val = sock.recv(1024).decode('utf-8')
     room_data = {}
     if ret_val[0] != '@':
         room_data = json.loads(ret_val)
