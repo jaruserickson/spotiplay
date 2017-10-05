@@ -13,12 +13,12 @@ spotiplay has Linux and OSX support.
 
 [PLEASE DO NOT TRY THIS YET: APP IS IN DEVELOPMENT]
 
-Linux you need to install `python-dbus` package.
+Linux users need to install `python-dbus` package.
 ```bash
 $ # Example using apt-get
 $ apt-get install python-dbus
 ```
-
+to install:
 ```bash
 $ git clone https://github.com/jaruserickson/spotiplay.git
 $ cd spotiplay
@@ -33,14 +33,25 @@ export SPOTIPY_CLIENT_ID='your-spotify-client-id'
 export SPOTIPY_CLIENT_SECRET='your-spotify-client-secret'
 ```
 
-if missing requirements:
+if missing setup.py misses any requirements:
 `pip install -r requirements.txt`
 
 
 ### Usage
 ```bash
-# To start the app type
 $ spotipy
+> /create_room
+Sending host request...
+Joined room: spay-snapback
+> /room
+spay-snapback
+> humble 
+# navigate thru curses panel to add songs to queue
+> /play
+#listen to your tunes
+> /pause
+> /leave
+Room spay-snapback left.
 ```
 
 Commands  
