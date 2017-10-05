@@ -22,12 +22,13 @@ def create_server():
     sock.listen(5) # queue up to 5 requests
 
     rooms = {}
+    print('Server initialized at ' + port)
 
     while 1:
         # establish a connection
         client, addr = sock.accept()
         addr = addr[0]
-        
+
         print('Connection from %s' % str(addr))
         command = client.recv(1024).decode('ascii')
         if command[0] == '/':
@@ -117,6 +118,8 @@ def create_server():
             print('Unknown command received.')
 
         client.close()
+
+    sock.close()
 
 if __name__ == "__main__":
     create_server()

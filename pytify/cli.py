@@ -39,13 +39,16 @@ class App:
 
     def leave_room(self):
         ''' leave a room '''
-        print('Sending leave request...')
-        ret = leave_room(HOST, PORT)
-        if ret[0] != '@':
-            self.room = None
-            sys.exit()
-            
-        print(ret)
+        if self.room:
+            print('Sending leave request...')
+            ret = leave_room(HOST, PORT, self.room.get_addr())
+            if ret[0] != '@':
+                self.room = None
+                sys.exit()
+                
+            print(ret)
+        else:
+            print("You're not in a room!")
 
     def join_room(self, addr):
         print('Sending join request...')
@@ -96,11 +99,13 @@ def create_room(host, port):
 
     return room_key
 
-def leave_room(host, port):
+def leave_room(host, port, addr):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((host, port))
 
     sock.send(('/LEAVE_ROOM' + "\r\n").encode('ascii'))
+    sock.send(addr.encode('ascii'))
+
     ret_val = sock.recv(1024).decode('ascii')
     sock.close()
 
