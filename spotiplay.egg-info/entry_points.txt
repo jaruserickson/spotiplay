@@ -1,3 +1,0 @@
-[console_scripts]
-spotiplay = pytify.cli:main
-
