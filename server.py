@@ -47,6 +47,8 @@ def create_server():
                 print('JOIN_ROOM request from %s' % str(addr))
                 room_addr = client.recv(1024).decode('ascii')
                 if rooms[room_addr]:
+                    if str(addr) not in rooms[room_addr]["users"]:
+                        rooms[room_addr]["users"].append(str(addr))
                     client.send(json.dumps(rooms[room_addr]).encode('ascii'))
                 else:
                     client.send(('@ ERROR: Invalid room address').encode('ascii'))
@@ -67,24 +69,15 @@ def create_server():
                 else:
                     client.send(('@ ERROR: Invalid room address').encode('ascii'))
 
-            elif command == '/PLAY':
-                print('PLAY request from %s' % str(addr))
+            elif command == '/PLAY_PAUSE':
+                print('PLAYPAUSE request from %s' % str(addr))
                 room_addr = client.recv(1024).decode('ascii')
                 if rooms[room_addr]:
                     if rooms[room_addr].host == str(addr):
-                        rooms[room_addr]["state"] = "PLAY"
-                        client.send(json.dumps(rooms[room_addr]).encode('ascii'))
-                    else:
-                        client.send(('@ ERROR: Invalid permissions').encode('ascii'))
-                else:
-                    client.send(('@ ERROR: Invalid room address').encode('ascii'))
-
-            elif command == '/PAUSE':
-                print('PAUSE request from %s' % str(addr))
-                room_addr = client.recv(1024).decode('ascii')
-                if rooms[room_addr]:
-                    if rooms[room_addr].host == str(addr):
-                        rooms[room_addr]["state"] = "PAUSE"
+                        if rooms[room_addr]["state"] == "PLAY":
+                            rooms[room_addr]["state"] = "PAUSE"
+                        else:
+                            rooms[room_addr]["state"] = "PLAY"
                         client.send(json.dumps(rooms[room_addr]).encode('ascii'))
                     else:
                         client.send(('@ ERROR: Invalid permissions').encode('ascii'))
@@ -109,7 +102,7 @@ def create_server():
                 room_addr = client.recv(1024).decode('ascii')
                 new_queue = json.loads(client.recv(1024).decode('ascii'))
                 if rooms[room_addr]:
-                    rooms[room_addr]["songs"] = new_queue
+                    rooms[room_addr]["songs"] = new_queue["queue"]
                     client.send(('^ Queue updated.').encode('ascii'))
                 else:
                     client.send(('@ ERROR: Invalid room address'))
