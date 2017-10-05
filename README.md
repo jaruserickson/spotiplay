@@ -63,6 +63,6 @@ Commands:
 
 ### Logistics
 
-A SOCK_STREAM connection is hosted on Amazon EC2, which stores a dictionary containing multiple other dictionaries each with a unique `key`, a `queue`, and `users`. When the host user performs an action, it is sent to the server, verified for host and then sends a string with the room key and action back to the users. If the room key matches, it will perform the action. 
+A socket connection is hosted on Amazon EC2, which stores a dictionary containing multiple other dictionaries each with a unique `key`, a `queue`, and `users`. When the host user performs an action, it is sent to the server, verified for host and then sends a string with the room key and action back to the users. If the room key matches, it will perform the action. 
 
 This app is essentially a heavy socket mask over Pytify, a wonderful app which can be seen at: https://github.com/bjarneo/Pytify

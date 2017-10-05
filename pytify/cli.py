@@ -5,6 +5,8 @@ import json
 import sys
 import pkg_resources
 import pytify.pytifylib
+from Crypto.Cipher import AES
+
 from pytify.strategy import get_pytify_class_by_platform
 from pytify.song_list import SongList
 from pytify.prompt import custom_prompt
@@ -12,8 +14,8 @@ from pytify.commander import Commander
 
 from pytify.room import Room
 
-HOST = 'ec2-54-89-160-77.compute-1.amazonaws.com'
 PORT = 8080
+HOST = str(AES.new('1n1dklmnAMADKENM', AES.MODE_ECB).decrypt(b'\xd8\x85\x11\xa85P$\x91\xee\x87\x05>\x9e\x89\xba\xb0\xa5\x14\xfa\xbdu\xe5F\xf6\xa7\xa2\x1d\x92\x1e\x91}\x1f\x96e\x91\x8b\x14\xf6O,&\x16\xd1\xdb\x91\xc4\x98"\xd3\xd2\x1b\x19(\x9f\xa4G[\x18\x8d\\\x06\x81!\x83').strip())[2:-1]
 
 class App:
     def __init__(self):
@@ -80,7 +82,7 @@ class App:
 def create_room(host, port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((host, port))
-    
+
     sock.send(('/CREATE_ROOM' + "\r\n").encode('ascii'))
     room_key = sock.recv(1024).decode('ascii')
     sock.close()
