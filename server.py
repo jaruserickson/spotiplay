@@ -26,7 +26,8 @@ def create_server():
     while 1:
         # establish a connection
         client, addr = sock.accept()
-
+        addr = addr[0]
+        
         print('Connection from %s' % str(addr))
         command = client.recv(1024).decode('ascii')
         if command[0] == '/':
@@ -53,7 +54,12 @@ def create_server():
                 print('LEAVE_ROOM request from %s' % str(addr))
                 room_addr = client.recv(1024).decode('ascii')
                 if rooms[room_addr]:
-                    rooms[room_addr]["users"].remove(str(addr))
+                    # reassign host if host leaves
+                    if rooms[room_addr]["host"] == str(addr):
+                        if rooms[room_addr]["users"][0]:
+                            rooms[room_addr]["host"] = rooms[room_addr]["users"][0]
+                    else:
+                        rooms[room_addr]["users"].remove(str(addr))
                     client.send(('Room %s left.' % room_key + "\r\n").encode('ascii'))
                 else:
                     client.send(('@ ERROR: Invalid room address').encode('ascii'))
