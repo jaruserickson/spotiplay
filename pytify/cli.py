@@ -44,9 +44,8 @@ class App:
             ret = leave_room(HOST, PORT, self.room.get_addr())
             if ret[0] != '@':
                 self.room = None
-                sys.exit()
-                
-            print(ret)
+                print(ret)
+                sys.exit()          
         else:
             print("You're not in a room!")
 
