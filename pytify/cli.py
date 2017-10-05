@@ -94,7 +94,7 @@ def create_room(host, port):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((host, port))
 
-    sock.send(('/CREATE_ROOM' + "\r\n").encode('ascii'))
+    sock.send(('/CREATE_ROOM').encode('ascii'))
     room_key = sock.recv(1024).decode('ascii')
     sock.close()
 
@@ -105,7 +105,7 @@ def leave_room(host, port, addr):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((host, port))
 
-    sock.send(('/LEAVE_ROOM' + "\r\n").encode('ascii'))
+    sock.send(('/LEAVE_ROOM').encode('ascii'))
     sock.send(addr.encode('ascii'))
 
     ret_val = sock.recv(1024).decode('ascii')
@@ -118,7 +118,7 @@ def join_room(host, port, room_addr):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((host, port))
 
-    sock.send(('/JOIN_ROOM' + "\r\n").encode('ascii'))
+    sock.send(('/JOIN_ROOM').encode('ascii'))
     sock.send((str(room_addr)))
     ret_val = sock.recv(1024).decode('ascii')
     room_data = {}
