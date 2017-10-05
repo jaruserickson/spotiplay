@@ -36,7 +36,7 @@ class Room(Pytifylib):
             "uri": self.pytify._get_song_uri_at_index(key),
             "name": self.pytify._get_song_name_at_index(key)
         })
-        print(update_queue(self.addr, self.queue))
+        print(update_queue(self.addr, {"queue": self.queue}))
 
     def remove_song(self, key):
         ''' remove song, assuming were in the search '''
