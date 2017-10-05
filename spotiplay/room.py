@@ -62,9 +62,10 @@ def update_queue(addr, queue):
     if addr:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.connect((HOST, PORT))
+        print(addr)
         sock.send(('/UPDATE_Q').encode('utf-8'))
         sock.send(str(addr).encode('utf-8'))
-        sock.send(pickle.dumps(queue))
+        sock.send(pickle.dumps(queue).encode('utf-8'))
 
         return sock.recv(1024).decode('utf-8')
 
