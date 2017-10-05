@@ -74,7 +74,7 @@ def playpause(addr, pytify):
         sock.connect((HOST, PORT))
         sock.send(('/PLAY_PAUSE').encode('ascii'))
         sock.send(str(addr).encode('ascii'))
-        ret_val = sock.recv(1024).decode('ascii')
+        ret_val = sock.recv(4096).decode('ascii')
         if ret_val[0] != '@':
             room_data = json.loads(ret_val)
         else:

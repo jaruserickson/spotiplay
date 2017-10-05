@@ -95,17 +95,17 @@ def create_server():
                     else:
                         client.send(('@ ERROR: Invalid permissions').encode('ascii'))
                 else:
-                    client.send(('@ ERROR: Invalid room address')).encode('ascii')
+                    client.send(('@ ERROR: Invalid room address').encode('ascii'))
 
             elif command == '/UPDATE_Q':
                 print('UPDATE_Q request from %s' % str(addr))
                 room_addr = client.recv(1024).decode('ascii')
-                new_queue = json.loads(client.recv(1024).decode('ascii'))
+                new_queue = json.loads(client.recv(4096).decode('ascii'))
                 if rooms[room_addr]:
                     rooms[room_addr]["songs"] = new_queue["queue"]
                     client.send(('^ Queue updated.').encode('ascii'))
                 else:
-                    client.send(('@ ERROR: Invalid room address'))
+                    client.send(('@ ERROR: Invalid room address').encode('ascii'))
 
             else:
                 print('Unknown command received.')
