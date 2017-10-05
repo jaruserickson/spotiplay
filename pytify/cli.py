@@ -84,12 +84,13 @@ class App:
             if self.room:
                 search = self.pytify.query(search_input)
                 if search:
-                    self.list_songs(list=self.pytify.list())
+                    self.list_songs(self.pytify.list())
             else:
                 print('You need a room to add songs to!')
 
 
 def create_room(host, port):
+    ''' actually send the create room request to the server '''
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((host, port))
 
@@ -100,6 +101,7 @@ def create_room(host, port):
     return room_key
 
 def leave_room(host, port, addr):
+    ''' actually send the leave room request to the server '''
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((host, port))
 
@@ -112,6 +114,7 @@ def leave_room(host, port, addr):
     return ret_val
 
 def join_room(host, port, room_addr):
+    ''' actually send the join room request to the server '''
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((host, port))
 
@@ -128,6 +131,7 @@ def join_room(host, port, room_addr):
     return room_data
 
 def main():
+    ''' main '''
     try:
         App()
     except EOFError:

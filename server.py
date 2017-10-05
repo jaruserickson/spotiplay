@@ -59,11 +59,13 @@ def create_server():
                     if rooms[room_addr]["host"] == str(addr):
                         if rooms[room_addr]["users"][0]:
                             rooms[room_addr]["host"] = rooms[room_addr]["users"][0]
+                        else:
+                            del rooms[room_addr]
                     else:
                         rooms[room_addr]["users"].remove(str(addr))
-                    client.send(('Room %s left.' % room_key + "\r\n").encode('ascii'))
+                    client.send(('Room ' + room_addr + ' left.\r\n').encode('ascii'))
                 else:
-                    client.send(('@ ERROR: Invalid room address').encode('ascii'))
+                    client.send(('@ ERROR: Invalid room address\r\n').encode('ascii'))
 
             elif command == '/PLAY\r\n':
                 print('PLAY request from %s' % str(addr))
