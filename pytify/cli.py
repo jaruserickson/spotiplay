@@ -5,6 +5,7 @@ from pytify.strategy import get_pytify_class_by_platform
 from pytify.song_list import SongList
 from pytify.prompt import custom_prompt
 from pytify.commander import Commander
+from room.room import Room
 import argparse
 import sys
 import pkg_resources
@@ -13,71 +14,47 @@ import pkg_resources
 class App:
     def __init__(self):
         self.pytify = get_pytify_class_by_platform()()
+        self.room = None
+        self.command = Commander(self.pytify, self.room)
 
-        self.command = Commander(self.pytify)
-
-        self.run()
+        self.interaction()
 
     def list_songs(self, list):
-        SongList(list)
+        SongList(list, self.room)
 
-    def run(self):
-        parser = argparse.ArgumentParser(description='Spotify remote')
+    def host_room(self):
+        print('hosting')
+        # connect
+        self.room = Room()
 
-        parser.add_argument(
-            '-n', help='for next song', action='store_true'
-        )
-        parser.add_argument(
-            '-p', help='for previous song', action='store_true'
-        )
-        parser.add_argument(
-            '-pp', help='for play and pause song', action='store_true'
-        )
-        parser.add_argument(
-            '-s', help='stop music', action='store_true'
-        )
-        parser.add_argument(
-            '-c', help='current playing', action='store_true'
-        )
-
-        args = parser.parse_args()
-
-        if args.n:
-            self.pytify.next()
-
-        elif args.p:
-            self.pytify.prev()
-
-        elif args.pp:
-            self.pytify.play_pause()
-
-        elif args.s:
-            self.pytify.stop()
-
-        elif args.c:
-            print(self.pytify.get_current_playing())
-
-        else:
-            self.interaction()
-
-    def get_package_name(self):
-        return pkg_resources.require('pytify')[0]
+    def leave_room(self):
+        print('leaving')
+        # leave
+        self.room = None
 
     def interaction(self):
-        print(
-            '%s [https://github.com/bjarneo/Pytify]' % self.get_package_name()
-        )
+        print('spotiplay [pytify] 0.0.1')
 
         while 1:
             search_input = custom_prompt()
 
+            if search_input == '/create_room':
+                self.host_room()
+                continue
+            elif search_input == '/leave':
+                self.leave_room()
+                continue
+
             if self.command.run(search_input):
                 continue
 
-            search = self.pytify.query(search_input)
+            if self.room:
+                search = self.pytify.query(search_input)
 
-            if search:
-                self.list_songs(list=self.pytify.list())
+                if search:
+                    self.list_songs(list=self.pytify.list())
+            else:
+                print('You need a room to add songs to!')
 
 
 def main():

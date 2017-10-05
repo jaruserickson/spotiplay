@@ -42,7 +42,7 @@ def get_prompt_tokens(cli):
         (Token.At,        '@'),
         (Token.Host,      os.uname()[1]),
         (Token.Separator, ' - '),
-        (Token.Text,      'Search:'),
+        (Token.Text,      'Add Songs or CMD:'),
         (Token.Arrow,     '\n> '),
     ]
 

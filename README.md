@@ -2,8 +2,9 @@
 <a href='https://spotiplay.jaruserickson.com'><img src='SPOTIPLAY.png' height='200'></a>
 </p>
 
-Search and start songs from the CLI -- with friends!.
-spotiplay has Linux and OS X support.
+Search and start songs from the CLI -- with friends!
+
+spotiplay has Linux and OSX support.
 
 *Spotify must be running in the background in order to use this cli remote*
 
@@ -35,19 +36,7 @@ if missing requirements:
 ### Usage
 ```bash
 # To start the app type
-$ pytify
-
-# next song
-$ pytify -n
-
-# prev song
-$ pytify -p
-
-# play and pause song
-$ pytify -pp
-
-# Current playing song
-$ pytify -c
+$ spotipy
 ```
 
 Commands  
@@ -63,6 +52,13 @@ Commands:
  create_room          create a room
  leave                leave a room
  room                 get room addr
+ queue                get room queue
 
 ```
 
+
+### Logistics
+
+A SOCK_STREAM connection is hosted on Amazon EC2, which stores a dictionary containing multiple other dictionaries each with a unique `key`, a `queue`, and `users`. When the host user performs an action, it is sent to the server, verified for host and then sends a string with the room key and action back to the users. If the room key matches, it will perform the action. 
+
+This app is essentially a socket mask over Pytify, a wonderful app which can be seen at: https://github.com/bjarneo/Pytify
