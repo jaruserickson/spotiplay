@@ -1,6 +1,7 @@
 ''' room.py '''
 import socket
 import json
+import pickle
 from spotiplay.pytifylib import Pytifylib
 from Crypto.Cipher import AES
 
@@ -36,7 +37,7 @@ class Room(Pytifylib):
             "uri": self.pytify._get_song_uri_at_index(key),
             "name": self.pytify._get_song_name_at_index(key)
         })
-        print(update_queue(self.addr, {"queue": self.queue}))
+        print(update_queue(self.addr, self.queue))
 
     def remove_song(self, key):
         ''' remove song, assuming were in the search '''
@@ -45,7 +46,7 @@ class Room(Pytifylib):
                 "uri": self.pytify._get_song_uri_at_index(key),
                 "name": self.pytify._get_song_name_at_index(key)
             })
-            ret = update_queue(self.addr, {"queue": self.queue})
+            ret = update_queue(self.addr, self.queue)
             print(ret)
             return ret[0] == '^'
         except ValueError:
@@ -63,7 +64,7 @@ def update_queue(addr, queue):
         sock.connect((HOST, PORT))
         sock.send(('/UPDATE_Q').encode('ascii'))
         sock.send(str(addr).encode('ascii'))
-        sock.send(json.dumps(queue).encode('ascii'))
+        sock.send(pickle.dumps(queue).encode('ascii'))
 
         return sock.recv(1024).decode('ascii')
 

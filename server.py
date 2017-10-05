@@ -1,6 +1,7 @@
 ''' server.py '''
 import socket
 import json
+import pickle
 import random
 import requests
 
@@ -100,7 +101,7 @@ def create_server():
             elif command == '/UPDATE_Q':
                 print('UPDATE_Q request from %s' % str(addr))
                 room_addr = client.recv(1024).decode('ascii')
-                new_queue = json.loads(client.recv(4096).decode('ascii'))
+                new_queue = pickle.loads(client.recv(4096).decode('ascii'))
                 if rooms[room_addr]:
                     rooms[room_addr]["songs"] = new_queue["queue"]
                     client.send(('^ Queue updated.').encode('ascii'))
