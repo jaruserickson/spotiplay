@@ -29,9 +29,8 @@ def create_server():
 
         print('Connection from %s' % str(addr))
         command = client.recv(1024).decode('ascii')
-        print(command == '/CREATE_ROOM\r\n')
         if command[0] == '/':
-            if command == '/CREATE_ROOM':
+            if command == '/CREATE_ROOM\r\n':
                 print('CREATE_ROOM request from %s' % str(addr))
                 room_key = random_key()
                 rooms[room_key] = {
@@ -42,7 +41,7 @@ def create_server():
                 }
                 client.send((room_key + "\r\n").encode('ascii'))
 
-            elif command == '/JOIN_ROOM':
+            elif command == '/JOIN_ROOM\r\n':
                 print('JOIN_ROOM request from %s' % str(addr))
                 room_addr = client.recv(1024).decode('ascii')
                 if rooms[room_addr]:
@@ -50,7 +49,7 @@ def create_server():
                 else:
                     client.send(('@ ERROR: Invalid room address\r\n').encode('ascii'))
 
-            elif command == '/LEAVE_ROOM':
+            elif command == '/LEAVE_ROOM\r\n':
                 print('LEAVE_ROOM request from %s' % str(addr))
                 room_addr = client.recv(1024).decode('ascii')
                 if rooms[room_addr]:
@@ -59,7 +58,7 @@ def create_server():
                 else:
                     client.send(('@ ERROR: Invalid room address').encode('ascii'))
 
-            elif command == '/PLAY':
+            elif command == '/PLAY\r\n':
                 print('PLAY request from %s' % str(addr))
                 room_addr = client.recv(1024).decode('ascii')
                 if rooms[room_addr]:
@@ -71,7 +70,7 @@ def create_server():
                 else:
                     client.send(('@ ERROR: Invalid room address\r\n').encode('ascii'))
 
-            elif command == '/PAUSE':
+            elif command == '/PAUSE\r\n':
                 print('PAUSE request from %s' % str(addr))
                 room_addr = client.recv(1024).decode('ascii')
                 if rooms[room_addr]:
@@ -83,7 +82,7 @@ def create_server():
                 else:
                     client.send(('@ ERROR: Invalid room address\r\n').encode('ascii'))
 
-            elif command == '/NEXT_SONG':
+            elif command == '/NEXT_SONG\r\n':
                 print('NEXT_SONG request from %s' % str(addr))
                 room_addr = client.recv(1024).decode('ascii')
                 if rooms[room_addr]:
@@ -96,7 +95,7 @@ def create_server():
                 else:
                     client.send(('@ ERROR: Invalid room address\r\n')).encode('ascii')
 
-            elif command == '/UPDATE_Q':
+            elif command == '/UPDATE_Q\r\n':
                 print('UPDATE_Q request from %s' % str(addr))
                 room_addr = client.recv(1024).decode('ascii')
                 new_queue = json.loads(client.recv(1024).decode('ascii'))
