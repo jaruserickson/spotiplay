@@ -15,8 +15,8 @@ $ apt-get install python-dbus
 ```
 
 ```bash
-$ git clone https://github.com/bjarneo/Pytify.git
-$ cd Pytify
+$ git clone https://github.com/jaruserickson/spotiplay.git
+$ cd spotiplay
 $ sudo python setup.py install
 ```
 
