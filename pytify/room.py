@@ -8,7 +8,7 @@ PORT = 8080
 
 class Room(Pytifylib):
     ''' room '''
-    def __init__(self, pytify, addr, room_data):
+    def __init__(self, pytify, addr, room_data=None):
         self.pytify = pytify
         self.addr = addr
         if room_data:

@@ -9,15 +9,16 @@ setup(
     long_description='https://github.com/jaruserickson/spotiplay',
     url='https://github.com/jaruserickson/spotiplay',
     download_url='https://pypi.python.org/pypi/pytify',
-    author='jaruserickson',
+    author='jaruserickson [pytify: bjarneo]',
     author_email='jarus.erickson@gmail.com',
     license='MIT',
-    keywords='spotify spotiplay pytify song search curses',
+    keywords='spotify spotiplay pytify spotipy dj room song search curses',
     packages=find_packages(),
     install_requires=[
         'requests ~= 2.4.3',
         'spotipy~=2.3.8',
-        'prompt-toolkit==1.0.0'
+        'prompt-toolkit==1.0.0',
+        'pycrypto~=2.6.1'
     ],
     entry_points={
         'console_scripts': [

@@ -29,6 +29,7 @@ def create_server():
 
         print('Connection from %s' % str(addr))
         command = client.recv(1024).decode('ascii')
+        print(command + '-' + command[0])
         if command[0] == '/':
             if command == '/CREATE_ROOM':
                 print('CREATE_ROOM request from %s' % str(addr))
@@ -104,7 +105,7 @@ def create_server():
                     client.send(('^ Queue updated.\r\n').encode('ascii'))
                 else:
                     client.send(('@ ERROR: Invalid room address\r\n'))
-                    
+
             else:
                 print('Unknown command received.')
         else:

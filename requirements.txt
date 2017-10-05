@@ -3,3 +3,4 @@
 requests ~= 2.4.3
 prompt-toolkit == 1.0.0
 spotipy ~= 2.3.8
+pycrypto ~= 2.6.1
