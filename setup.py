@@ -1,18 +1,18 @@
 from setuptools import setup, find_packages
 
-__version__ = '3.5.1'
+__version__ = '0.0.1'
 
 setup(
-    name='pytify',
+    name='spotiplay',
     version=__version__,
-    description='Spotify remote. Search, start and navigate through songs.',
-    long_description='https://github.com/bjarneo/pytify',
-    url='https://github.com/bjarneo/pytify',
+    description='Spotify rooms.',
+    long_description='https://github.com/jaruserickson/spotiplay',
+    url='https://github.com/jaruserickson/spotiplay',
     download_url='https://pypi.python.org/pypi/pytify',
-    author='Bjarne Oeverli',
-    author_email='bjarne.oeverli@gmail.com',
+    author='jaruserickson',
+    author_email='jarus.erickson@gmail.com',
     license='MIT',
-    keywords='spotify pytify song search curses',
+    keywords='spotify spotiplay pytify song search curses',
     packages=find_packages(),
     install_requires=[
         'requests ~= 2.4.3',
