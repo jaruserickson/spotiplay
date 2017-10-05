@@ -29,7 +29,7 @@ def create_server():
 
         print('Connection from %s' % str(addr))
         command = client.recv(1024).decode('ascii')
-        print(command + '-' + command[0])
+        print(command[0] == '/')
         if command[0] == '/':
             if command == '/CREATE_ROOM':
                 print('CREATE_ROOM request from %s' % str(addr))
