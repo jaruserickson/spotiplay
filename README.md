@@ -1,4 +1,6 @@
-![spotiplay logo](https://github.com/jaruserickson/spotiplay/blob/master/SPOTIPLAY.png?raw=true)
+<p align="center">
+<a href='https://spotiplay.jaruserickson.com'><img src='SPOTIPLAY.png' height='200'></a>
+</p>
 
 Search and start songs from the CLI -- with friends!.
 spotiplay has Linux and OS X support.
