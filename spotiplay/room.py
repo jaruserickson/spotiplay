@@ -64,7 +64,7 @@ def update_queue(addr, queue):
         sock.connect((HOST, PORT))
         sock.send(('/UPDATE_Q').encode('ascii'))
         sock.send(str(addr).encode('ascii'))
-        sock.send(pickle.dumps(queue).encode('ascii'))
+        sock.send(pickle.dumps(queue))
 
         return sock.recv(1024).decode('ascii')
 
