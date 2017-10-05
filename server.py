@@ -57,8 +57,8 @@ def create_server():
                 if rooms[room_addr]:
                     # reassign host if host leaves
                     if rooms[room_addr]["host"] == str(addr):
-                        if rooms[room_addr]["users"][0]:
-                            rooms[room_addr]["host"] = rooms[room_addr]["users"][0]
+                        if len(rooms[room_addr]["users"]) > 0:
+                            rooms[room_addr]["host"] = rooms[room_addr]["users"].pop(0)
                         else:
                             del rooms[room_addr]
                     else:
