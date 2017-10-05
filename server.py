@@ -9,7 +9,7 @@ WORDS = requests.get(WORD_SITE).content.splitlines()
 
 def random_key():
     ''' get a random key from bsd words '''
-    return random.choice(WORDS) + '-' + random.choice(WORDS)
+    return str(random.choice(WORDS))[2:-1] + '-' + str(random.choice(WORDS))[2:-1]
 
 def create_server():
     ''' create a server object '''
