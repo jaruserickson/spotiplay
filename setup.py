@@ -21,7 +21,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'pytify=pytify.cli:main'
+            'spotiplay=pytify.cli:main'
         ]
     },
     classifiers=[

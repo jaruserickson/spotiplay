@@ -2,8 +2,9 @@ from __future__ import absolute_import, unicode_literals
 
 
 class Commander():
-    def __init__(self, Pytifylib):
+    def __init__(self, Pytifylib, Room):
         self.pytify = Pytifylib
+        self.room = Room
 
     def parse(self, command):
         if command and command[0] != '/':
@@ -21,7 +22,11 @@ class Commander():
             'prev': 'play previous song',
             'pp': 'play or pause song',
             'stop': 'stop',
-            'history': 'last ten history entries'
+            'history': 'last ten history entries',
+            'create_room': 'create a room',
+            'leave': 'leave a room',
+            'room': 'get room addr',
+            'queue': 'get room queue'
         }
 
     def validate(self, command):
@@ -70,5 +75,17 @@ class Commander():
 
         elif command == 'history':
             self.pytify.print_history()
+
+        elif command == 'room':
+            if self.room:
+                print(self.room.get_addr())
+            else:
+                print("You're not in a room!")
+
+        elif command == 'queue':
+            if self.room:
+                print(self.room.get_queue())
+            else:
+                print("You're not in a room!")
 
         return True

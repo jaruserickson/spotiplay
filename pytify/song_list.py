@@ -7,8 +7,9 @@ from pytify.strategy import get_pytify_class_by_platform
 
 
 class SongList():
-    def __init__(self, items):
+    def __init__(self, items, room):
         self.pytify = get_pytify_class_by_platform()()
+        self.room = room
         self.items = items
 
         self.position = 2
@@ -47,10 +48,13 @@ class SongList():
         self.items.append('  <j> <down> ')
         self.items.append('Prev: <h> <left>')
         self.items.append('Next: <l> <right>')
-        self.items.append('Play: <p> <enter>')
+        self.items.append('Add Song To Queue: <p> <enter>')
+        self.items.append('Remove Song From Queue: <r>')
         self.items.append('Search: <s>')
         self.items.append('Play/Pause: <spacebar>')
         self.items.append('Quit: <q>')
+        self.items.append('Queue:')
+        self.items.append(self.room.get_queue())
 
     def navigate(self, n):
         self.position += n
@@ -100,7 +104,10 @@ class SongList():
 
             # Start song
             if play(key):
-                self.pytify.listen(int(self.position - 1))
+                self.room.add_song(int(self.position - 1))
+
+            elif key == ord('r'):
+                self.room.remove_song(int(self.position - 1))
 
             # Up
             elif key == ord('k') or key == curses.KEY_UP:
@@ -116,7 +123,7 @@ class SongList():
 
             # Rights
             elif key == ord('l') or key == curses.KEY_RIGHT:
-                self.pytify.next()
+                self.pytify.listen(self.room.get_next_song())
 
             # Play/Pause
             elif key == ord(' '):
@@ -128,8 +135,7 @@ class SongList():
 
             # Quit
             elif key == ord('q'):
-                curses.endwin()
-                sys.exit()
+                break
 
 
         stdscr.clear()

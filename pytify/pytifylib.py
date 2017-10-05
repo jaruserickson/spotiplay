@@ -4,8 +4,6 @@ import spotipy
 from pytify.history import history
 from spotipy.oauth2 import SpotifyClientCredentials
 
-
-
 # Fetch songs with spotify api
 class Pytifylib:
     # hold songs
