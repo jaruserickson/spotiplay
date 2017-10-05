@@ -4,7 +4,7 @@ build/
 *.swp
 *.swu
 dist/
-pytify.egg-info/
+spotiplay.egg-info/
 run.py
 notify.py
 .pytify-search-history
