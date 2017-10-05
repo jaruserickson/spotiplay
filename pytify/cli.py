@@ -5,7 +5,6 @@ from pytify.strategy import get_pytify_class_by_platform
 from pytify.song_list import SongList
 from pytify.prompt import custom_prompt
 from pytify.commander import Commander
-from room.room import Room
 import argparse
 import sys
 import pkg_resources
