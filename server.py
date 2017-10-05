@@ -22,7 +22,7 @@ def create_server():
     sock.listen(5) # queue up to 5 requests
 
     rooms = {}
-    print('Server initialized at ' + port)
+    print('Server initialized at ' + str(port))
 
     while 1:
         # establish a connection
