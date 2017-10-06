@@ -4,7 +4,11 @@
 
 Search and start songs from the CLI -- with friends!
 
-spotiplay has Linux and OSX support.
+## Credit
+
+This project wouldn't be possible without [Spotipy](https://github.com/plamere/spotipy) or [Pytify](https://github.com/bjarneo/Pytify). This project was originally forked from Pytify.
+
+spotiplay only has LINUX and OSX support.
 
 *Spotify must be running in the background in order to use this cli remote*
 *Spotify should not be interfered with for the true rooms experience*
