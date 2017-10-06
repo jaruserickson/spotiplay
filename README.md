@@ -11,6 +11,7 @@ This project wouldn't be possible without [Spotipy](https://github.com/plamere/s
 spotiplay only has LINUX and OSX support.
 
 *Spotify must be running in the background in order to use this cli remote*
+
 *Spotify should not be interfered with for the true rooms experience*
 
 ## Installation
