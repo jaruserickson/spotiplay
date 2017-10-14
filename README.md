@@ -1,5 +1,9 @@
+# NOTE: spotiplay is officially deprecated. please take a look at SPOTICAST for the current version
+
+[SPOTICAST](https://github.com/jaruserickson/spoticast)
+
 <p align="center">
-<a href='https://spotiplay.jaruserickson.com'><img src='SPOTIPLAY.png' height='200'></a>
+<a href='https://github.com/jaruserickson/spoticast'><img src='SPOTIPLAY.png' height='200'></a>
 </p>
 
 Search and start songs from the CLI -- with friends!

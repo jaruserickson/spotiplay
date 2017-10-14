@@ -61,12 +61,14 @@ class Darwin(Pytifylib):
             ' tell application "Spotify"\n'
             '  set currentArtist to artist of current track as string\n'
             '  set currentTitle to name of current track as string\n'
-            '  return currentArtist & " - " & currentTitle\n'
+            '  set currentTime to player position as string\n'
+            '  return currentArtist & " - " & currentTitle & " - " & currentTime\n'
             ' end tell\n'
             'end getCurrentTrack\n'
             'getCurrentTrack()')
         proc = subprocess.Popen(
             ['osascript', '-e', instruction],
             stdout=subprocess.PIPE)
+
         out, err = proc.communicate()
         return out.decode(sys.getfilesystemencoding()).rstrip()

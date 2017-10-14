@@ -4,11 +4,11 @@ from sys import platform
 
 def get_pytify_class_by_platform():
     if 'linux' in platform:
-        from pytify.linux import Linux
+        from spotiplay.linux import Linux
 
         return Linux
     elif 'darwin' in platform:
-        from pytify.darwin import Darwin
+        from spotiplay.darwin import Darwin
 
         return Darwin
     else:
