@@ -54,6 +54,7 @@ class App:
             if ret[0] != '@':
                 self.room = None
                 print(ret)
+                self.parent.terminate()
                 sys.exit()          
         else:
             print("You're not in a room!")
@@ -75,7 +76,10 @@ class App:
 
             if search_input == '/create_room':
                 if not self.room:
-                    self.host_room()
+                    try:
+                        self.host_room()
+                    except ConnectionRefusedError:
+                        print('Spotiplay server is down.')
                 continue
 
             elif search_input == '/leave':

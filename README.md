@@ -16,8 +16,6 @@ spotiplay only has LINUX and OSX support.
 
 ## Installation
 
-[PLEASE DO NOT TRY THIS YET: APP IS IN DEVELOPMENT]
-
 Linux users need to install `python-dbus` package.
 ```bash
 $ # Example using apt-get
